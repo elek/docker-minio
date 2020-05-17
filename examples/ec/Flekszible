@@ -1,0 +1,8 @@
+source:
+  - path: ../../flekszible
+import:
+  - path: minio
+    transformations:
+     - type: minio/ec
+     - type: minio/scale
+       scale: 6

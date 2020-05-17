@@ -1,0 +1,29 @@
+name: minio/scale
+description: Scale default cluster to n
+parameters:
+ - name: scale
+---
+- type: replace
+  trigger:
+     metadata:
+        name: minio
+     kind: StatefulSet
+  path:
+    - spec
+    - replicas
+  value: {{.scale}}
+- type: replace
+  trigger:
+     metadata:
+       name: minio
+  path:
+    - spec
+    - template
+    - spec
+    - containers
+    - minio
+    - args
+  value:
+    - minio
+    - server
+    - http://minio-{0...{{.scale}}}.minio.default.svc.cluster.local/data

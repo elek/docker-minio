@@ -1,0 +1,12 @@
+name: minio/ec
+description: Enabled n:2 EC redundancy
+---
+- type: add
+  trigger:
+     metadata:
+        name: minio-config
+  path:
+    - data
+  value:
+    MINIO_STORAGE_CLASS_STANDARD: "EC:3"
+    MINIO_STORAGE_CLASS_RRS: "EC:2"
