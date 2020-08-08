@@ -1,4 +1,4 @@
 source:
-  - path: ../flekszible
+  - path: ../..
 import:
   - path: minio

@@ -5,12 +5,27 @@ metadata:
   name: minio
   labels:
     app: minio
+    component: server
 spec:
   selector:
     matchLabels:
       app: minio
       component: server
   serviceName: minio
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: component
+            operator: In
+            values:
+            - minio
+          - key: app
+            operator: In
+            values:
+            - minio
+        topologyKey: "kubernetes.io/hostname"
   replicas: 6
   template:
     metadata:
